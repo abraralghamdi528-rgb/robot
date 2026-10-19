@@ -1,0 +1,106 @@
+<!-- Reusable footer: HTML, CSS and JavaScript live together. -->
+<style>
+  .nx-footer{background:#070a10;border-top:1px solid #263040;color:#f4f5f7;font:14px/1.7 Arial,sans-serif}
+  .nx-footer *{box-sizing:border-box}
+  .nx-footer a{color:#b2bdce;text-decoration:none}
+  .nx-footer a:hover{color:white}
+  .nx-foot-wrap{max-width:1280px;margin:auto;padding:58px 32px 24px}
+  .nx-foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding-bottom:44px}
+  .nx-foot-brand{font-size:19px;letter-spacing:3px;font-weight:bold;color:#fff!important}
+  .nx-foot-intro{max-width:320px;color:#9ca9bb;margin-top:18px}
+  .nx-footer h2{font:12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#fff;margin:0 0 18px}
+  .nx-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .nx-foot-bottom{border-top:1px solid #253043;padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#9ca9bb;font-size:12px}
+  .nx-foot-top{border:1px solid #3b4b65;background:#101b2c;border-radius:4px;color:white;padding:10px 14px;cursor:pointer;font:inherit}
+  .nx-foot-note{color:#9ca9bb;font-size:11px;margin:24px 0 0;max-width:800px}
+  .nx-footer :focus-visible{outline:2px solid #a5c3ff;outline-offset:5px}
+
+  @media(max-width:600px){
+    .nx-foot-wrap{padding:40px 22px 24px}
+    .nx-foot-grid{grid-template-columns:1fr 1fr;gap:30px}
+    .nx-foot-grid>div:first-child{grid-column:1/-1}
+    .nx-foot-bottom{align-items:flex-start;flex-direction:column}
+  }
+</style>
+
+<footer class="nx-footer">
+  <div class="nx-foot-wrap">
+    <div class="nx-foot-grid">
+      <div>
+        <a class="nx-foot-brand" href="./index.html">NEXUS ROBOTICS</a>
+
+        <p class="nx-foot-intro">
+          Extraordinary machines.<br>
+          Real-world possibilities.<br>
+          Find the next move for your world.
+        </p>
+      </div>
+
+      <div>
+        <h2>Explore</h2>
+
+        <ul>
+          <li><a href="./index.html#collection">Robot collection</a></li>
+          <li><a href="./index.html#applications">Applications</a></li>
+          <li><a href="./index.html#approach">Our approach</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Get started</h2>
+
+        <ul>
+          <li><a href="./index.html#contact">Plan your project</a></li>
+          <li>
+            <a
+              href="https://shop.unitree.com/collections/humanoid-robot"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Unitree specifications ↗
+            </a>
+          </li>
+          <li><a href="./index.html#faq">Common questions</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="nx-foot-bottom">
+      <span>
+        © <span id="nx-year">2026</span>
+        Nexus Robotics. All rights reserved.
+      </span>
+
+      <span>Engineered for what comes next.</span>
+
+      <button class="nx-foot-top" type="button">Back to top ↑</button>
+    </div>
+
+    <p class="nx-foot-note">
+      Concept storefront. Product names and imagery belong to their
+      respective owners. No manufacturer affiliation is implied.
+      Configuration, pricing and availability require confirmation.
+    </p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const footer = document.querySelector('.nx-footer');
+
+  footer.querySelector('#nx-year').textContent = new Date().getFullYear();
+
+  footer.querySelector('.nx-foot-top').addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth'
+    });
+
+    document.querySelector('.skip-link')?.focus({
+      preventScroll: true
+    });
+  });
+})();
+</script>

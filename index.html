@@ -1,0 +1,1764 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d14">
+
+  <meta
+    name="description"
+    content="Explore humanoid and quadruped robots with Nexus Robotics. Discover the right platform for your next project."
+  >
+
+  <title>Nexus Robotics — Your next extraordinary move</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d14;
+      --panel: #111925;
+      --line: #293448;
+      --muted: #a8b3c5;
+      --white: #f6f7fa;
+      --blue: #1b3970;
+      --accent: #9fbeff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button,
+    a,
+    input,
+    textarea,
+    select {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: wait;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 5px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .wrap {
+      width: min(1216px, calc(100% - 64px));
+      margin: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 18px;
+      top: -80px;
+      z-index: 100;
+      background: white;
+      color: black;
+      padding: 12px 20px;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    #site-header {
+      display: contents;
+    }
+
+    .part-error {
+      background: #17243a;
+      padding: 16px;
+      text-align: center;
+      margin: 0;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #9fbeff;
+      border-radius: 50%;
+      margin-right: 9px;
+      box-shadow: 0 0 14px #9fbeff;
+    }
+
+    /* Video banner */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: radial-gradient(
+        ellipse at 80% 40%,
+        #1c365a,
+        #090d14 75%
+      );
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      pointer-events: none;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(5, 10, 19, 0.92) 0%,
+          rgba(6, 12, 23, 0.76) 42%,
+          rgba(6, 12, 23, 0.24) 100%
+        ),
+        linear-gradient(
+          0deg,
+          #090d14 0%,
+          transparent 25%,
+          rgba(5, 10, 19, 0.12) 100%
+        );
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 740px;
+      align-items: center;
+      gap: 40px;
+      padding-top: 90px;
+      padding-bottom: 110px;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+    }
+
+    .hero h1 {
+      font-size: clamp(46px, 5.4vw, 78px);
+      line-height: 1.02;
+      letter-spacing: -4px;
+      font-weight: 500;
+      margin: 24px 0;
+    }
+
+    .hero h1 em {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      color: #bacff4;
+    }
+
+    .hero-copy > p {
+      max-width: 465px;
+      color: #d1d9e7;
+      font-size: 16px;
+    }
+
+    .hero-fine {
+      font-size: 11px !important;
+      letter-spacing: 1px;
+      margin-top: 28px;
+      color: #b8c7dc !important;
+    }
+
+    .hero-video-control {
+      position: absolute;
+      right: 32px;
+      bottom: 28px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid #8a9cb8;
+      border-radius: 30px;
+      background: rgba(9, 17, 31, 0.82);
+      color: white;
+      font-size: 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-video-control:hover {
+      background: #203a60;
+    }
+
+    .hero-video-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    /* Buttons */
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      padding: 14px 21px;
+      border-radius: 4px;
+      border: 1px solid #44659c;
+      background: #183666;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      transition:
+        background 0.2s,
+        transform 0.2s;
+    }
+
+    .btn:hover {
+      background: #254a85;
+      transform: translateY(-2px);
+    }
+
+    .btn.light {
+      background: #eef2f9;
+      color: #14203b;
+      border-color: #eef2f9;
+    }
+
+    .btn.ghost {
+      background: rgba(9, 17, 31, 0.55);
+      border-color: #46526a;
+      color: #e0e5ee;
+    }
+
+    /* Brand statement */
+
+    .brand-strip {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #0c121c;
+    }
+
+    .brand-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 23px;
+    }
+
+    .brand-inner span:first-child {
+      color: #9ca9bd;
+      font-size: 10px;
+      letter-spacing: 2px;
+      max-width: 180px;
+    }
+
+    .brand-inner strong {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #bec8d8;
+      font-weight: 500;
+    }
+
+    /* Section headings */
+
+    section.block {
+      padding: 90px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 500;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin: 13px 0;
+    }
+
+    h2 em {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      color: #c1d0ea;
+    }
+
+    .section-head > p {
+      max-width: 300px;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    /* Collection filters */
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 28px 0;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: #a9b5c9;
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-size: 12px;
+    }
+
+    .filter[aria-pressed="true"] {
+      color: white;
+      background: #19315b;
+      border-color: #496b9e;
+    }
+
+    .count {
+      color: #94a3bc;
+      font-size: 12px;
+      margin-left: auto;
+      align-self: center;
+    }
+
+    /* Product cards */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product {
+      background: #101722;
+      border: 1px solid #28354a;
+      border-radius: 5px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .product:hover {
+      border-color: #7793c0;
+    }
+
+    .product-visual {
+      height: 270px;
+      position: relative;
+      background: #111a28;
+      overflow: hidden;
+    }
+
+    .product-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .product:hover img {
+      transform: scale(1.035);
+    }
+
+    .badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #0a1426e8;
+      border: 1px solid #53678a;
+      border-radius: 2px;
+      padding: 5px 9px;
+      font-size: 9px;
+      letter-spacing: 1.4px;
+    }
+
+    .product-body {
+      padding: 23px;
+    }
+
+    .product-body small {
+      font-size: 9px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .product h3 {
+      font-size: 24px;
+      font-weight: 500;
+      margin: 6px 0;
+    }
+
+    .product p {
+      font-size: 13px;
+      color: var(--muted);
+      min-height: 63px;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      border-block: 1px solid var(--line);
+      padding: 13px 0;
+      color: #c3cee0;
+      gap: 10px;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 18px;
+    }
+
+    .product-bottom > a {
+      font-size: 11px;
+      color: #aab7cd;
+    }
+
+    .product-bottom button {
+      border: 1px solid #405c89;
+      background: #172e53;
+      color: white;
+      border-radius: 3px;
+      padding: 9px 12px;
+      font-size: 11px;
+    }
+
+    .catalog-note {
+      font-size: 11px;
+      color: #9eabc0;
+      margin: 20px 0 0;
+    }
+
+    /* Applications */
+
+    .applications {
+      background: #101927;
+      border-block: 1px solid var(--line);
+    }
+
+    .use-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+    }
+
+    .use-intro > p {
+      color: var(--muted);
+      max-width: 390px;
+      font-size: 14px;
+    }
+
+    .use-list {
+      display: grid;
+    }
+
+    .use-row {
+      padding: 22px 0;
+      border-bottom: 1px solid #334159;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 20px;
+    }
+
+    .use-row:first-child {
+      padding-top: 0;
+    }
+
+    .use-row > span {
+      font: 12px Georgia, serif;
+      color: #99b1d9;
+    }
+
+    .use-row h3 {
+      font-weight: 500;
+      font-size: 19px;
+      margin: 0 0 8px;
+    }
+
+    .use-row p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Our approach */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin-top: 40px;
+    }
+
+    .step {
+      border-top: 1px solid #405272;
+      padding-top: 24px;
+    }
+
+    .step > span {
+      font: italic 28px Georgia, serif;
+      color: var(--accent);
+    }
+
+    .step h3 {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .step p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Contact */
+
+    .contact {
+      border: 1px solid #3d557c;
+      background: linear-gradient(115deg, #192e50, #0e1726);
+      padding: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 70px;
+    }
+
+    .contact h2 {
+      max-width: 620px;
+      margin-top: 12px;
+    }
+
+    .contact p {
+      font-size: 13px;
+      color: #b9c7dc;
+      max-width: 500px;
+    }
+
+    /* FAQ */
+
+    .faq {
+      max-width: 830px;
+      margin: auto;
+      padding-bottom: 75px;
+    }
+
+    .faq h2 {
+      margin-bottom: 28px;
+    }
+
+    .faq details {
+      border-bottom: 1px solid var(--line);
+      padding: 19px 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .faq details p {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 710px;
+    }
+
+    /* Enquiry dialog */
+
+    dialog {
+      color: var(--white);
+      background: #111c2d;
+      border: 1px solid #4f6488;
+      border-radius: 7px;
+      padding: 30px;
+      width: min(540px, calc(100% - 32px));
+      max-height: 90vh;
+      overflow: auto;
+    }
+
+    dialog::backdrop {
+      background: #02060dde;
+      backdrop-filter: blur(5px);
+    }
+
+    .dialog-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 20px;
+    }
+
+    .dialog-top h2 {
+      font-size: 28px;
+      letter-spacing: -0.5px;
+      margin: 4px 0;
+    }
+
+    .close-dialog {
+      padding: 2px 10px;
+      background: none;
+      border: 1px solid #4a5e7d;
+      border-radius: 3px;
+      color: white;
+      font-size: 24px;
+    }
+
+    dialog p {
+      font-size: 12px;
+      color: #b4c0d5;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      margin: 15px 0;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      background: #0b1320;
+      color: white;
+      border: 1px solid #536581;
+      border-radius: 4px;
+      padding: 11px;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .form-status {
+      font-size: 12px;
+      color: #bcd3fc;
+    }
+
+    /* Responsive layouts */
+
+    @media (min-width: 1600px) {
+      .hero-grid {
+        min-height: 800px;
+      }
+    }
+
+    @media (max-width: 950px) {
+      .hero-grid {
+        gap: 28px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .product-visual {
+        height: 220px;
+      }
+
+      .product-body {
+        padding: 18px;
+      }
+
+      .product-bottom {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .product p {
+        min-height: 84px;
+      }
+
+      .use-grid {
+        gap: 35px;
+      }
+
+      .brand-inner strong {
+        font-size: 11px;
+      }
+
+      .contact {
+        padding: 35px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .wrap {
+        width: calc(100% - 40px);
+      }
+
+      .hero-grid {
+        min-height: 670px;
+        padding-top: 70px;
+        padding-bottom: 110px;
+        gap: 20px;
+      }
+
+      .hero-overlay {
+        background:
+          linear-gradient(
+            90deg,
+            rgba(5, 10, 19, 0.86),
+            rgba(5, 10, 19, 0.57)
+          ),
+          linear-gradient(0deg, #090d14, transparent 40%);
+      }
+
+      .hero-video-control {
+        right: 20px;
+        bottom: 23px;
+      }
+
+      .hero h1 {
+        font-size: 54px;
+        letter-spacing: -2.7px;
+      }
+
+      .hero-copy > p {
+        font-size: 14px;
+      }
+
+      .brand-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .brand-inner span:first-child {
+        max-width: none;
+        grid-column: 1 / -1;
+      }
+
+      .brand-inner strong {
+        font-size: 10px;
+      }
+
+      section.block {
+        padding: 60px 0;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .section-head > p {
+        max-width: 100%;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-visual {
+        height: 330px;
+      }
+
+      .product p {
+        min-height: 0;
+      }
+
+      .product-bottom {
+        align-items: center;
+        flex-direction: row;
+      }
+
+      .count {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .use-grid,
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .contact {
+        align-items: start;
+        flex-direction: column;
+        padding: 28px;
+        margin-bottom: 50px;
+      }
+
+      .contact .btn {
+        width: 100%;
+      }
+
+      .faq {
+        padding-bottom: 50px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header loaded from header.html -->
+  <div id="site-header" aria-busy="true"></div>
+
+  <noscript>
+    <p class="part-error">
+      Enable JavaScript to load navigation and interactive features.
+      Browse the collection below.
+    </p>
+  </noscript>
+
+  <main id="main" tabindex="-1">
+
+    <!-- Video banner -->
+    <section class="hero" aria-labelledby="hero-title">
+
+      <video
+        class="hero-video"
+        id="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <source
+          src="./media/robot-hero.mp4"
+          type="video/mp4"
+        >
+      </video>
+
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">
+            <span class="dot"></span>The next era of robotics
+          </span>
+
+          <h1 id="hero-title">
+            Intelligence.<br>
+            In motion.<br>
+            <em>Within reach.</em>
+          </h1>
+
+          <p>
+            Meet a new generation of extraordinary machines. Explore humanoid
+            and quadruped robots built to move ideas into the real world.
+          </p>
+
+          <div class="actions">
+            <a class="btn light" href="#collection">
+              Explore the collection
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <a class="btn ghost" href="#applications">
+              Find your application
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <p class="hero-fine">
+            HUMANOIDS &nbsp; / &nbsp; QUADRUPEDS &nbsp; / &nbsp; POSSIBILITIES
+          </p>
+        </div>
+      </div>
+
+      <button
+        class="hero-video-control"
+        id="hero-video-control"
+        type="button"
+        aria-controls="hero-video"
+        hidden
+      >
+        Play video
+      </button>
+
+      <span
+        class="hero-video-status"
+        id="hero-video-status"
+        role="status"
+      ></span>
+    </section>
+
+    <!-- Brand statement -->
+    <div class="brand-strip">
+      <div class="wrap brand-inner">
+        <span>A NEW PERSPECTIVE ON WHAT'S POSSIBLE</span>
+        <strong>HUMAN-CENTRED DESIGN</strong>
+        <strong>EMBODIED INTELLIGENCE</strong>
+        <strong>REAL-WORLD EXPLORATION</strong>
+      </div>
+    </div>
+
+    <!-- Robot collection -->
+    <section
+      class="block wrap"
+      id="collection"
+      aria-labelledby="collection-title"
+    >
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">01 / The collection</span>
+
+          <h2 id="collection-title">
+            Find your next <em>possibility.</em>
+          </h2>
+        </div>
+
+        <p>
+          Different forms. Shared ambition. Explore the platform
+          that fits your vision.
+        </p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter robots">
+        <button
+          class="filter"
+          type="button"
+          data-filter="all"
+          aria-pressed="true"
+        >
+          All robots
+        </button>
+
+        <button
+          class="filter"
+          type="button"
+          data-filter="humanoid"
+          aria-pressed="false"
+        >
+          Humanoids
+        </button>
+
+        <button
+          class="filter"
+          type="button"
+          data-filter="quadruped"
+          aria-pressed="false"
+        >
+          Quadrupeds
+        </button>
+
+        <span class="count" id="result-count" aria-live="polite">
+          3 platforms to explore
+        </span>
+      </div>
+
+      <div class="products">
+
+        <!-- Unitree G1 -->
+        <article class="product" data-category="humanoid">
+          <div class="product-visual">
+            <img
+              src="https://shop.unitree.com/cdn/shop/files/Banner_Mobile_1024x1024.jpg?v=1773216922"
+              alt="Unitree G1 humanoid robot"
+              loading="lazy"
+              width="600"
+              height="600"
+            >
+
+            <span class="badge">HUMANOID</span>
+          </div>
+
+          <div class="product-body">
+            <small>Unitree / G series</small>
+            <h3>Unitree G1</h3>
+
+            <p>
+              A compact humanoid platform for exploring dynamic motion
+              and embodied intelligence.
+            </p>
+
+            <div class="product-meta">
+              <span>Humanoid platform</span>
+              <span>EDU options</span>
+            </div>
+
+            <div class="product-bottom">
+              <a
+                href="https://shop.unitree.com/products/unitree-g1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Specifications ↗
+              </a>
+
+              <button type="button" data-inquire="Unitree G1">
+                Enquire +
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Unitree H2 -->
+        <article class="product" data-category="humanoid">
+          <div class="product-visual">
+            <img
+              src="https://shop.unitree.com/cdn/shop/files/1_310a5bdb-64dd-4206-8806-0c8bfdea6314_1024x1024.jpg?v=1769744850"
+              alt="Unitree H2 full-size humanoid robot"
+              loading="lazy"
+              width="600"
+              height="600"
+            >
+
+            <span class="badge">FEATURED HUMANOID</span>
+          </div>
+
+          <div class="product-body">
+            <small>Unitree / H series</small>
+            <h3>Unitree H2</h3>
+
+            <p>
+              A full-size humanoid that brings expressive movement
+              and a refined physical presence together.
+            </p>
+
+            <div class="product-meta">
+              <span>180 cm platform</span>
+              <span>31 degrees of freedom</span>
+            </div>
+
+            <div class="product-bottom">
+              <a
+                href="https://shop.unitree.com/products/unitree-h2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Specifications ↗
+              </a>
+
+              <button type="button" data-inquire="Unitree H2">
+                Enquire +
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Unitree Go2 -->
+        <article class="product" data-category="quadruped">
+          <div class="product-visual">
+            <img
+              src="https://shop.unitree.com/cdn/shop/files/01_a95a9d1f-623b-4500-8f62-ea3a3103fa31_1024x1024.jpg?v=1718274191"
+              alt="Unitree Go2 four-legged robot"
+              loading="lazy"
+              width="600"
+              height="600"
+            >
+
+            <span class="badge">QUADRUPED</span>
+          </div>
+
+          <div class="product-body">
+            <small>Unitree / Go series</small>
+            <h3>Unitree Go2</h3>
+
+            <p>
+              Agile, four-legged mobility meets LiDAR perception.
+              A different way to explore your surroundings.
+            </p>
+
+            <div class="product-meta">
+              <span>Quadruped platform</span>
+              <span>4D LiDAR</span>
+            </div>
+
+            <div class="product-bottom">
+              <a
+                href="https://shop.unitree.com/products/unitree-go2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Specifications ↗
+              </a>
+
+              <button type="button" data-inquire="Unitree Go2">
+                Enquire +
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="catalog-note">
+        Explore current manufacturer platforms. Configuration, development
+        access, pricing and delivery depend on the selected edition and region.
+      </p>
+    </section>
+
+    <!-- Applications -->
+    <section
+      class="block applications"
+      id="applications"
+      aria-labelledby="applications-title"
+    >
+      <div class="wrap use-grid">
+        <div class="use-intro">
+          <span class="eyebrow">02 / Built around your ambition</span>
+
+          <h2 id="applications-title">
+            Big ideas.<br>
+            <em>Physical possibilities.</em>
+          </h2>
+
+          <p>
+            Start with the outcome you want. Match the platform, edition
+            and development tools to the work you have in mind.
+          </p>
+
+          <a class="btn ghost" href="#contact">
+            Explore your project
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="use-list">
+          <div class="use-row">
+            <span>01</span>
+
+            <div>
+              <h3>Research &amp; education</h3>
+
+              <p>
+                Explore locomotion, perception and embodied AI.
+                Confirm SDK access with the appropriate education edition.
+              </p>
+            </div>
+          </div>
+
+          <div class="use-row">
+            <span>02</span>
+
+            <div>
+              <h3>Experiences &amp; demonstrations</h3>
+
+              <p>
+                Bring robotics into exhibitions and demonstrations with
+                an operating plan suited to your venue.
+              </p>
+            </div>
+          </div>
+
+          <div class="use-row">
+            <span>03</span>
+
+            <div>
+              <h3>Prototype &amp; develop</h3>
+
+              <p>
+                Evaluate hardware, payload and integration requirements
+                before choosing your development platform.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our approach -->
+    <section
+      class="block wrap"
+      id="approach"
+      aria-labelledby="approach-title"
+    >
+      <span class="eyebrow">03 / A clearer path forward</span>
+
+      <h2 id="approach-title">
+        From curiosity to <em>your first move.</em>
+      </h2>
+
+      <div class="steps">
+        <div class="step">
+          <span>01.</span>
+          <h3>Define the ambition</h3>
+
+          <p>
+            Outline your application, environment and the people
+            who will operate the robot.
+          </p>
+        </div>
+
+        <div class="step">
+          <span>02.</span>
+          <h3>Choose the platform</h3>
+
+          <p>
+            Compare form, configuration and development access
+            against your project requirements.
+          </p>
+        </div>
+
+        <div class="step">
+          <span>03.</span>
+          <h3>Plan the next step</h3>
+
+          <p>
+            Prepare a project brief and confirm a quotation,
+            lead time and onboarding needs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section
+      class="wrap contact"
+      id="contact"
+      aria-labelledby="contact-title"
+    >
+      <div>
+        <span class="eyebrow">Your next chapter starts here</span>
+
+        <h2 id="contact-title">
+          Let's find the robot<br>
+          <em>for your world.</em>
+        </h2>
+
+        <p>
+          Tell us what you have in mind. Prepare your project brief
+          and take the first step.
+        </p>
+      </div>
+
+      <button
+        class="btn light"
+        type="button"
+        data-inquire="Not sure yet"
+      >
+        Start your enquiry
+        <span aria-hidden="true">↗</span>
+      </button>
+    </section>
+
+    <!-- FAQ -->
+    <section class="wrap faq" id="faq" aria-labelledby="faq-title">
+      <span class="eyebrow">Good to know</span>
+
+      <h2 id="faq-title">A few questions, answered.</h2>
+
+      <details>
+        <summary>Which robot is right for my project?</summary>
+
+        <p>
+          Start with your intended application, environment and development
+          needs. Humanoids and quadrupeds offer different physical
+          capabilities; check the manufacturer's specifications for the
+          exact edition.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I develop my own applications?</summary>
+
+        <p>
+          Development access varies by model and edition. Unitree identifies
+          EDU editions for secondary development on G1 and H2. Confirm access,
+          tools and supported features before selecting a configuration.
+        </p>
+      </details>
+
+      <details>
+        <summary>How do enquiries work on this website?</summary>
+
+        <p>
+          This is a storefront template. The enquiry form downloads a project
+          brief to your device; it does not send a message or place an order.
+          A live store needs a connected sales service.
+        </p>
+      </details>
+
+      <details>
+        <summary>Are prices and delivery dates confirmed?</summary>
+
+        <p>
+          No. Request an edition-specific quotation including shipping,
+          applicable taxes, availability and delivery estimates
+          before purchasing.
+        </p>
+      </details>
+    </section>
+  </main>
+
+  <!-- Footer loaded from footer.html -->
+  <div id="site-footer" aria-busy="true"></div>
+
+  <!-- Enquiry dialog -->
+  <dialog
+    id="enquiry-dialog"
+    aria-labelledby="enquiry-title"
+    aria-describedby="enquiry-description"
+  >
+    <div class="dialog-top">
+      <div>
+        <span class="eyebrow">The next step</span>
+        <h2 id="enquiry-title">Your project starts here.</h2>
+      </div>
+
+      <button
+        type="button"
+        class="close-dialog"
+        aria-label="Close enquiry"
+      >
+        ×
+      </button>
+    </div>
+
+    <p id="enquiry-description">
+      Create a project brief. This demo downloads your enquiry locally;
+      nothing is sent or ordered.
+    </p>
+
+    <form id="enquiry-form">
+      <label class="field">
+        Your name
+
+        <input
+          name="name"
+          autocomplete="name"
+          required
+          maxlength="100"
+        >
+      </label>
+
+      <label class="field">
+        Email address
+
+        <input
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="200"
+        >
+      </label>
+
+      <label class="field">
+        Platform
+
+        <select name="platform">
+          <option>Unitree G1</option>
+          <option>Unitree H2</option>
+          <option>Unitree Go2</option>
+          <option>Not sure yet</option>
+        </select>
+      </label>
+
+      <label class="field">
+        Tell us about your project
+
+        <textarea
+          name="project"
+          placeholder="Application, location, timeline and requirements…"
+          required
+          maxlength="2500"
+        ></textarea>
+      </label>
+
+      <div class="form-actions">
+        <button class="btn light" type="submit">
+          Download enquiry ↓
+        </button>
+
+        <span
+          class="form-status"
+          role="status"
+          id="form-status"
+        ></span>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    /*
+      Load trusted local templates.
+
+      Inline scripts must be recreated after insertion,
+      because innerHTML does not execute them automatically.
+    */
+    async function loadTemplate(targetId, file) {
+      const target = document.getElementById(targetId);
+
+      try {
+        if (location.protocol === 'file:') {
+          throw new Error('Use a local HTTP server');
+        }
+
+        const response = await fetch(
+          new URL(file, document.baseURI)
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        target.innerHTML = await response.text();
+
+        for (const oldScript of [
+          ...target.querySelectorAll('script')
+        ]) {
+          if (oldScript.src) {
+            throw new Error(
+              'Templates must contain inline scripts only'
+            );
+          }
+
+          const script = document.createElement('script');
+
+          script.textContent = oldScript.textContent;
+          oldScript.replaceWith(script);
+        }
+      } catch (error) {
+        target.replaceChildren();
+
+        const message = document.createElement('p');
+
+        message.className = 'part-error';
+
+        message.textContent =
+          `Could not load ${file}. ` +
+          'Serve all three templates from the same folder ' +
+          'over HTTP, then reload.';
+
+        target.append(message);
+
+        console.error(
+          `Template loading failed: ${file}`,
+          error
+        );
+      } finally {
+        target.setAttribute('aria-busy', 'false');
+      }
+    }
+
+    Promise.allSettled([
+      loadTemplate('site-header', './header.html'),
+      loadTemplate('site-footer', './footer.html')
+    ]);
+
+    /*
+      Background video.
+
+      Muted playback supports autoplay.
+      A manual button is available if autoplay is blocked.
+      Reduced-motion preferences pause automatic playback.
+    */
+    const heroVideo = document.getElementById('hero-video');
+
+    const videoControl = document.getElementById(
+      'hero-video-control'
+    );
+
+    const videoStatus = document.getElementById(
+      'hero-video-status'
+    );
+
+    const reducedMotion = matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
+
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    videoControl.hidden = false;
+
+    function syncVideoControl() {
+      videoControl.textContent = heroVideo.paused
+        ? 'Play video'
+        : 'Pause video';
+    }
+
+    async function playHeroVideo() {
+      try {
+        await heroVideo.play();
+        videoStatus.textContent = '';
+      } catch (error) {
+        if (
+          error.name !== 'AbortError' &&
+          !heroVideo.error
+        ) {
+          videoStatus.textContent =
+            'Automatic playback is unavailable. ' +
+            'Use Play video to start.';
+        }
+      } finally {
+        syncVideoControl();
+      }
+    }
+
+    videoControl.addEventListener('click', () => {
+      if (heroVideo.paused) {
+        playHeroVideo();
+      } else {
+        heroVideo.pause();
+      }
+    });
+
+    heroVideo.addEventListener(
+      'play',
+      syncVideoControl
+    );
+
+    heroVideo.addEventListener(
+      'pause',
+      syncVideoControl
+    );
+
+    function showVideoFallback() {
+      heroVideo.pause();
+      heroVideo.hidden = true;
+      videoControl.hidden = true;
+
+      videoStatus.textContent =
+        'Background video unavailable. ' +
+        'Showing a static background.';
+    }
+
+    heroVideo.addEventListener(
+      'error',
+      showVideoFallback
+    );
+
+    heroVideo.querySelector('source').addEventListener(
+      'error',
+      showVideoFallback
+    );
+
+    if (reducedMotion.matches) {
+      heroVideo.autoplay = false;
+      heroVideo.pause();
+      syncVideoControl();
+    } else {
+      playHeroVideo();
+    }
+
+    reducedMotion.addEventListener('change', event => {
+      if (event.matches) {
+        heroVideo.pause();
+      }
+    });
+
+    /*
+      Filter the robot collection.
+    */
+    document.querySelectorAll('[data-filter]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter]').forEach(item => {
+          item.setAttribute(
+            'aria-pressed',
+            String(item === button)
+          );
+        });
+
+        let count = 0;
+
+        document.querySelectorAll('.product').forEach(product => {
+          const visible =
+            button.dataset.filter === 'all' ||
+            product.dataset.category === button.dataset.filter;
+
+          product.hidden = !visible;
+
+          if (visible) count++;
+        });
+
+        document.getElementById('result-count').textContent =
+          `${count} platform${count === 1 ? '' : 's'} to explore`;
+      });
+    });
+
+    /*
+      Open and close the enquiry dialog.
+    */
+    const dialog = document.getElementById('enquiry-dialog');
+    const form = document.getElementById('enquiry-form');
+
+    let enquiryTrigger;
+
+    document.querySelectorAll('[data-inquire]').forEach(button => {
+      button.addEventListener('click', () => {
+        enquiryTrigger = button;
+
+        form.elements.platform.value = button.dataset.inquire;
+
+        document.getElementById('form-status').textContent = '';
+
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelector('.close-dialog').addEventListener(
+      'click',
+      () => dialog.close()
+    );
+
+    dialog.addEventListener('close', () => {
+      enquiryTrigger?.focus();
+    });
+
+    /*
+      Download the enquiry as a local text file.
+      No message or order is sent.
+    */
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+
+      const values = new FormData(form);
+
+      const brief = [
+        'NEXUS ROBOTICS — PROJECT ENQUIRY',
+        `Date: ${new Date().toISOString().slice(0, 10)}`,
+
+        ...['name', 'email', 'platform', 'project'].map(
+          key => `${key.toUpperCase()}: ${values.get(key)}`
+        ),
+
+        '',
+        'Prepared locally. This enquiry has not been sent.'
+      ].join('\n\n');
+
+      const url = URL.createObjectURL(
+        new Blob([brief], {
+          type: 'text/plain;charset=utf-8'
+        })
+      );
+
+      const link = document.createElement('a');
+
+      link.href = url;
+      link.download = 'nexus-robotics-enquiry.txt';
+
+      document.body.append(link);
+
+      link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+
+      document.getElementById('form-status').textContent =
+        'Download started. Your enquiry has not been sent.';
+    });
+
+    /*
+      Show a readable fallback if a product image fails.
+    */
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('error', () => {
+        const fallback = document.createElement('div');
+
+        fallback.style.cssText = `
+          display: grid;
+          place-items: center;
+          padding: 30px;
+          height: 100%;
+          min-height: 200px;
+          background: #14223a;
+          color: #c7d6ef;
+          text-align: center;
+        `;
+
+        fallback.textContent =
+          `${img.alt} — image temporarily unavailable`;
+
+        img.replaceWith(fallback);
+      }, { once: true });
+    });
+  </script>
+</body>
+</html>
